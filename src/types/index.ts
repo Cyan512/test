@@ -1,0 +1,5 @@
+export type { TipoPrograma } from "./tipo-programa"
+export type { Facultad } from "./facultad"
+export type { Curso, Categoria } from "./curso"
+export type { Programa, Modalidad } from "./programa"
+export type { ProgramaCurso } from "./programa-curso"
