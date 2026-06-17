@@ -4,14 +4,19 @@ import { PageHero } from "@/src/components/shared/page-hero"
 import { ProgramGrid } from "@/src/components/shared/program-grid"
 import type { TipoPrograma } from "@/src/types"
 
+interface ProgramListProps {
+  params: Promise<{
+    tipo: string
+  }>
+}
+
 export default async function ProgramList({
   params,
-}: {
-  params: Promise<{ tipo: string }>
-}) {
+}: ProgramListProps) {
   const { tipo } = await params
 
   let tipoPrograma: TipoPrograma
+  
   try {
     tipoPrograma = await getTipoProgramaBySlug(tipo)
   } catch {

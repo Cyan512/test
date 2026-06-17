@@ -1,9 +1,5 @@
-export interface ApiResponse<T> {
-  success: boolean
-  message: string
-  data: T
-  timestamp: number
-}
+import { ApiResponse } from "@/src/types/api-response"
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://api.criseral.com/api/v1"
 
 export class ApiError extends Error {
   constructor(
@@ -15,8 +11,6 @@ export class ApiError extends Error {
     this.name = "ApiError"
   }
 }
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://api.criseral.com/api/v1"
 
 export async function apiFetch<T>(
   path: string,
