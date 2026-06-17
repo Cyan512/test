@@ -1,4 +1,9 @@
-import { ApiResponse } from "@/src/types/api-response"
+export interface ApiResponse<T> {
+  success: boolean
+  message: string
+  data: T
+  timestamp: number
+}
 
 export class ApiError extends Error {
   constructor(
