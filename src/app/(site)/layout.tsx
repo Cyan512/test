@@ -1,3 +1,6 @@
+import { Footer } from "@/src/components/footer";
+import { Header } from "@/src/components/header";
+
 export default function SiteLayout({
     children,
 }: {
@@ -5,13 +8,9 @@ export default function SiteLayout({
 }) {
     return (
         <>
-            <header>
-                este es el header
-            </header>
+            <Header />
             <main>{children}</main>
-            <footer>
-                este es el footer
-            </footer>
+            <Footer />
         </>
     );
 }
