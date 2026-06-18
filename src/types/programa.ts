@@ -1,7 +1,6 @@
 import type { TipoPrograma } from "./tipo-programa"
 import type { Facultad } from "./facultad"
-
-export type Modalidad = "PRESENCIAL" | "SEMIPRESENCIAL" | "VIRTUAL"
+import { Modalidad } from "@/src/types/enum/modalidad"
 
 export interface Programa {
   id: number

@@ -2,11 +2,14 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { getProgramaBySlug, getProgramasCursos } from "@/src/lib/api"
 import { PageHero } from "@/src/components/tipo/page-hero"
+import { ProgramActions } from "@/src/components/tipo/program-actions"
 import { CourseList } from "@/src/components/shared/course-list"
 import type { Programa } from "@/src/types"
 import { Button } from "@/src/components/ui/button"
 import Link from "next/link"
-import { ArrowLeft, Printer, Share2 } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
+import { MallaCurricularTab } from "@/src/components/tipo/slug/malla-curricular-tab"
 
 export async function generateMetadata({
   params,
@@ -62,56 +65,38 @@ export default async function ProgramDetail({
 
             <div className="h-px bg-primary/10" />
 
-            <div className="flex flex-col gap-3 pt-2">
-              <button className="flex items-center gap-2 text-left font-sans text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group">
-                <Share2 className="h-4 w-4 transition-colors group-hover:text-secondary" /> Compartir programa
-              </button>
-              <button onClick={() => window.print()} className="flex items-center gap-2 text-left font-sans text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group">
-                <Printer className="h-4 w-4 transition-colors group-hover:text-secondary" /> Imprimir programa
-              </button>
-            </div>
+            <ProgramActions />
           </aside>
+          <main className="lg:col-span-9 lg:pl-8 border-t lg:border-t-0 lg:border-l border-primary/10 pt-8 lg:pt-0">
+            <div className="hidden md:block">
+              <Tabs defaultValue="presentacion" className="w-full gap-8">
+                <TabsList className="flex border-b border-primary/10 w-full bg-transparent p-0 gap-0 rounded-none">
+                  <TabsTrigger value="presentacion" className='group-data-[variant=default]/tabs-list:data-active:shadow-none'>Presentación</TabsTrigger>
+                  <TabsTrigger value="malla" className='group-data-[variant=default]/tabs-list:data-active:shadow-none'>Malla Curricular</TabsTrigger>
+                  <TabsTrigger value="inversion" className='group-data-[variant=default]/tabs-list:data-active:shadow-none'>Inversión y Becas</TabsTrigger>
+                  <TabsTrigger value="lineas" className='group-data-[variant=default]/tabs-list:data-active:shadow-none'>Líneas de Investigación</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="presentacion">
+                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                </TabsContent>
+
+                <TabsContent value="malla">
+                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                </TabsContent>
+
+                <TabsContent value="inversion">
+                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                </TabsContent>
+
+                <TabsContent value="lineas">
+                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                </TabsContent>
+              </Tabs>
+            </div>
+          </main>
         </div>
       </div>
-      <section className="container mx-auto px-4 py-12">
-        <div className="grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-8">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Plan de estudios</h2>
-              <CourseList cursos={cursos} />
-            </div>
-          </div>
-          <aside className="space-y-6">
-            <div className="rounded-xl border border-border bg-card p-6">
-              <h3 className="font-semibold mb-4">Información del programa</h3>
-              <dl className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Modalidad</dt>
-                  <dd className="font-medium">{programa.modalidad}</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Facultad</dt>
-                  <dd className="font-medium">{programa.idFacultad.nombre}</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Convocatoria</dt>
-                  <dd className="font-medium">
-                    {programa.convocatoria ? (
-                      <span className="text-emerald-600 dark:text-emerald-400">Abierta</span>
-                    ) : (
-                      <span className="text-muted-foreground">Cerrada</span>
-                    )}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Tipo</dt>
-                  <dd className="font-medium">{programa.idTipoPrograma.nombre}</dd>
-                </div>
-              </dl>
-            </div>
-          </aside>
-        </div>
-      </section>
     </>
   )
 }
