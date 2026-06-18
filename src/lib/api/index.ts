@@ -1,5 +1,5 @@
 export { apiFetch, ApiError } from "./client"
-export type { ApiResponse } from "./client"
+export type { ApiResponse } from "@/src/types/api-response"
 
 export { getTiposPrograma, getTipoProgramaBySlug } from "./endpoints/tipos-programa"
 export { getFacultades } from "./endpoints/facultades"
