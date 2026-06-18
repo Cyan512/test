@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { getProgramaBySlug, getProgramasCursos } from "@/src/lib/api"
-import { PageHero } from "@/src/components/shared/page-hero"
+import { PageHero } from "@/src/components/tipo/page-hero"
 import { CourseList } from "@/src/components/shared/course-list"
 import type { Programa } from "@/src/types"
+import { Button } from "@/src/components/ui/button"
+import Link from "next/link"
+import { ArrowLeft, Printer, Share2 } from "lucide-react"
 
 export async function generateMetadata({
   params,
@@ -41,9 +44,35 @@ export default async function ProgramDetail({
   return (
     <>
       <PageHero
+        image={"/bg/bg-programa.png"}
         title={programa.nombre}
         description={programa.idFacultad.nombre}
       />
+      <div className="w-full border-b border-border/40 py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <aside className="lg:col-span-3 space-y-6 lg:sticky lg:top-24 h-fit">
+            <Button variant="ghost" asChild className="group -ml-4 rounded-none hover:bg-transparent text-muted-foreground hover:text-foreground">
+              <Link href={`/${programa.idTipoPrograma.nombre}`} className="inline-flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                <span className="font-sans text-xs uppercase tracking-widest text-muted-foreground">
+                  Volver a programas
+                </span>
+              </Link>
+            </Button>
+
+            <div className="h-px bg-primary/10" />
+
+            <div className="flex flex-col gap-3 pt-2">
+              <button className="flex items-center gap-2 text-left font-sans text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group">
+                <Share2 className="h-4 w-4 transition-colors group-hover:text-secondary" /> Compartir programa
+              </button>
+              <button onClick={() => window.print()} className="flex items-center gap-2 text-left font-sans text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors group">
+                <Printer className="h-4 w-4 transition-colors group-hover:text-secondary" /> Imprimir programa
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
       <section className="container mx-auto px-4 py-12">
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-8">

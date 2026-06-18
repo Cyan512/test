@@ -4,10 +4,11 @@ import { AdmissionCTA } from "@/src/components/home/admission-cta"
 import { LatestComunicados } from "@/src/components/home/latest-comunicados"
 import { FeaturedPrograms } from "@/src/components/home/featured-programs"
 import StudentFAQ from "@/src/components/home/student-faq"
-import { getProgramas } from "@/src/lib/api"
+import { getProgramas, getTiposPrograma } from "@/src/lib/api"
 
 export default async function Home() {
   const programas = await getProgramas({ convocatoria: true })
+  const tipoProgramas = await getTiposPrograma()
 
   return (
     <>
@@ -15,7 +16,7 @@ export default async function Home() {
       <RectorMessage />
       <AdmissionCTA />
       <LatestComunicados />
-      <FeaturedPrograms programas={programas} />
+      <FeaturedPrograms programas={tipoProgramas} />
       <StudentFAQ />
     </>
   )
