@@ -4,10 +4,15 @@ import { Modalidad } from "@/src/types/enum/modalidad"
 
 export interface Programa {
   id: number
-  idTipoPrograma: TipoPrograma
   nombre: string
-  idFacultad: Facultad
   slug: string
+  imagen: string
   convocatoria: boolean
+  objetivoGeneral: string
+  objetivosEspecificos: string
+  perfilPosgraduado: string
+  idFacultad: Facultad
+  idTipoPrograma: TipoPrograma
   modalidad: Modalidad
+  lineasInvestigacion: string
 }

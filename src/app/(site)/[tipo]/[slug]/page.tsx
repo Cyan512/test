@@ -10,6 +10,8 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
 import { MallaCurricularTab } from "@/src/components/tipo/slug/malla-curricular-tab"
+import { PresentacionTab } from "@/src/components/tipo/slug/presentacion-tab"
+import { LineasInvestigacionTab } from "@/src/components/tipo/slug/lineas-investigacion-tab"
 
 export async function generateMetadata({
   params,
@@ -41,7 +43,7 @@ export default async function ProgramDetail({
   } catch {
     notFound()
   }
-
+  console.log(programa)
   const cursos = await getProgramasCursos({ programaId: programa.id })
 
   return (
@@ -78,11 +80,11 @@ export default async function ProgramDetail({
                 </TabsList>
 
                 <TabsContent value="presentacion">
-                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                  <PresentacionTab objetivoGeneral={programa.objetivoGeneral} objetivosEspecificos={programa.objetivosEspecificos} />
                 </TabsContent>
 
                 <TabsContent value="malla">
-                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                  {cursos && <MallaCurricularTab perfilPosgraduado={programa.perfilPosgraduado} cursos={cursos} />}
                 </TabsContent>
 
                 <TabsContent value="inversion">
@@ -90,7 +92,7 @@ export default async function ProgramDetail({
                 </TabsContent>
 
                 <TabsContent value="lineas">
-                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                  <LineasInvestigacionTab programa={programa.lineasInvestigacion}/>
                 </TabsContent>
               </Tabs>
             </div>

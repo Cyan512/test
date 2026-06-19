@@ -2,6 +2,7 @@ import type { ProgramaCurso } from "@/src/types"
 
 interface MallaCurricularTabProps {
   cursos: ProgramaCurso[]
+  perfilPosgraduado: string
 }
 
 const romanMap: Record<string, number> = {
@@ -17,7 +18,7 @@ function parseSemestre(sem: string): number {
   return Infinity
 }
 
-export function MallaCurricularTab({ cursos }: MallaCurricularTabProps) {
+export function MallaCurricularTab({ cursos, perfilPosgraduado }: MallaCurricularTabProps) {
   const grouped: Record<string, ProgramaCurso[]> = {}
   cursos.forEach((c) => {
     const sem = c.semestres
@@ -32,6 +33,20 @@ export function MallaCurricularTab({ cursos }: MallaCurricularTabProps) {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      {perfilPosgraduado && (
+        <section className="group">
+          <div className="mb-4 pb-2 border-b-2 border-primary/20">
+            <h2 className="font-heading text-3xl font-light uppercase tracking-wide text-foreground sm:text-4xl after:block after:w-8 after:h-0.5 after:bg-secondary after:mt-1">
+              Perfil del Graduado
+            </h2>
+          </div>
+          <div className="bg-linear-to-r from-secondary/5 to-transparent border-l-2 border-secondary pl-6 py-4">
+            <p className="font-sans text-base font-light leading-relaxed text-muted-foreground">
+              {perfilPosgraduado}
+            </p>
+          </div>
+        </section>
+      )}
       {semestres.map((sem) => (
         <section key={sem} className="group">
           <div className="mb-4 pb-2 border-b-2 border-primary/20">
