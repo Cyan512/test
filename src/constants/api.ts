@@ -4,4 +4,5 @@ export const ENDPOINTS = {
   CURSOS: "/cursos",
   PROGRAMAS: "/programas",
   PROGRAMAS_CURSOS: "/programas-cursos",
+  COMUNICADOS: "/comunicados",
 } as const

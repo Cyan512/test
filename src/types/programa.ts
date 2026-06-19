@@ -2,6 +2,8 @@ import type { TipoPrograma } from "./tipo-programa"
 import type { Facultad } from "./facultad"
 import { Modalidad } from "@/src/types/enum/modalidad"
 
+export type { Modalidad }
+
 export interface Programa {
   id: number
   nombre: string

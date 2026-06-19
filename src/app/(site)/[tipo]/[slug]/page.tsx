@@ -88,7 +88,7 @@ export default async function ProgramDetail({
                 </TabsContent>
 
                 <TabsContent value="inversion">
-                  {cursos && <MallaCurricularTab cursos={cursos} />}
+                  {cursos && <MallaCurricularTab cursos={cursos} perfilPosgraduado={programa.perfilPosgraduado} />}
                 </TabsContent>
 
                 <TabsContent value="lineas">
